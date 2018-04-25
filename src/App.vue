@@ -54,6 +54,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 p {
@@ -76,5 +77,6 @@ h6 {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $grey;
+  height: 100%;
 }
 </style>

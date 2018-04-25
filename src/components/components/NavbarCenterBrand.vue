@@ -58,7 +58,10 @@ export default {
         font-family: $lato;
         border-bottom: 1px solid #000;
         transition-duration: 0.3s;
-        z-index: 10;
+        z-index: 100;
+        position: fixed;
+        top: 0;
+        background-color: #fff;
 
         .branding {
             width: 25vw;

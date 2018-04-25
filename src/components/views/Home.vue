@@ -5,9 +5,7 @@
         <h1 class="header line">Davey Newhall</h1>
         <p class="bio">Minneapolis, Minnesota based UI/UX designer and full stack developer with a passion for rock climbing, cycling, and the outdoors.</p>
       </div>
-      <div class="main-image">
-
-      </div>
+      <img class="main-image" src="../../assets/images/portrait.svg" alt="Davey">
     </div>
   </div>
 </template>
@@ -21,6 +19,7 @@ export default {
 
 <style lang="scss" scoped>
   $orange: lighten(rgba(#cc9714, 1.0), 20%);
+  $grey: lighten(rgba(#000, 1), 30%);
 
   .wrapper {
     width: 100%;
@@ -29,13 +28,21 @@ export default {
     align-items: center;
     justify-content: center;
     text-align: left;
-    margin-top: 5vh;
     
     .top-content {
+      display: flex;
+      justify-content: flex-start;
+      box-sizing: content-box;
+      box-shadow: 0px 0px 50px 1px lighten($grey, 50%);
       width: 80%;
+      height: 70%;
 
       .copy {
-        width: 40%;
+        width: 50%;
+        padding: 2rem 1rem;
+        display: flex;
+        align-content: center;
+        flex-wrap: wrap;
 
         .header {
           display: inline-block;
@@ -46,6 +53,12 @@ export default {
         .bio {
           padding: 0 16px;
         }
+      }
+        
+      .main-image {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
       }
     }
 
