@@ -7,6 +7,13 @@
       </div>
       <img class="main-image" src="../../assets/images/portrait.svg" alt="Davey">
     </div>
+    <div class="separator">
+      <div class="grey" />
+      <div class="green" />
+    </div>
+    <div class="section illustrator">
+      <h1 class="title line">Illustrator Projects</h1>
+    </div>
   </div>
 </template>
 
@@ -20,14 +27,17 @@ export default {
 <style lang="scss" scoped>
   $orange: lighten(rgba(#cc9714, 1.0), 20%);
   $grey: lighten(rgba(#000, 1), 30%);
+  $green: rgba(76,189,148,1);
 
   .wrapper {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: left;
+    margin-top: 8%;
     
     .top-content {
       display: flex;
@@ -59,6 +69,41 @@ export default {
         height: 100%;
         width: 100%;
         object-fit: cover;
+      }
+    }
+
+    .section {
+      display: flex;
+      justify-content: flex-start;
+      width: 80%;
+
+      .title {
+        padding: 0 1rem;
+      }
+    }
+
+    .separator {
+      width: 70%;
+      display: flex;
+      margin: 5vh 0;
+
+      .grey,
+      .green {
+        width: 65%;
+        height: 24px;
+      }
+
+      .grey {
+        margin-bottom: 8px;
+        z-index: 10;
+        background: $grey;
+        transform: translateX(10%);
+      }
+
+      .green {
+        margin-top: 8px;
+        background: $green;
+        transform: translateX(-10%);
       }
     }
 

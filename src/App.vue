@@ -2,12 +2,24 @@
   <div id="app">
     <navbar logo="../static/Logo.svg"
             :links="links"></navbar>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/components/NavbarCenterBrand';
+
+window.onscroll = function() {fillScroll()};
+
+function fillScroll() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("progressBar").style.height = scrolled + "%";
+}
 
 export default {
   name: 'App',
@@ -49,6 +61,7 @@ export default {
 $lato : 'Lato', Helvetica, Arial, sans-serif;
 $pm : 'Permanent Marker', serif;
 $grey: rgba(#000, 0.8);
+$green: rgba(76,189,148,1);
 
 html,
 body {
@@ -78,5 +91,37 @@ h6 {
   text-align: center;
   color: $grey;
   height: 100%;
+}
+
+.progress-container {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  z-index: 5;
+  width: 8px;
+  height: 90vh;
+
+  .progress-bar {
+    width: 100%;
+    height: 0;
+    background: $green;
+  }
+}
+
+::-webkit-scrollbar-track
+{
+	// -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: transparent;
+}
+
+::-webkit-scrollbar
+{
+	width: 0px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: transparent;
 }
 </style>
