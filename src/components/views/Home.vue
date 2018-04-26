@@ -11,16 +11,60 @@
       <div class="grey" />
       <div class="green" />
     </div>
-    <div class="section illustrator">
-      <h1 class="title line">Illustrator Projects</h1>
+    <div class="section photos">
+      <div class="container">
+        <h1 class="title line">Photos</h1>
+        <div class="content">
+          <div class="photo"
+              v-for="photo in photos"
+              :key="photo.id"
+              @click="showModal(photo.url_z, photo.title)">
+            <img :src="photo.url_q" :alt="photo.title">
+          </div>
+        </div>
+      </div>
     </div>
+    <modal v-if="modalOpen" @close="closeModal()">
+      <img slot="content" :src="selectedImgUrl" :alt="selectedImgTitle">
+    </modal>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import Modal from '@/components/components/Modal'
+
+const flickrKey = "1e2d9abab954d38bdfe5922bed843d5e";
 
 export default {
-
+  data() {
+    return {
+      photos: [],
+      modalOpen: false,
+      selectedImgUrl: '',
+      selectedImgTitle: ''
+    }
+  },
+  mounted() {
+    axios
+      .get(`https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=${flickrKey}&user_id=154011588@N02&format=json&nojsoncallback=1&per_page=8&extras=url_q,url_z`)
+      .then(response => this.photos = response.data.photos.photo);
+  },
+  components: {
+    Modal
+  },
+  methods: {
+    showModal: function (url, title) {
+      this.modalOpen = true;
+      this.selectedImgUrl = url;
+      this.selectedImgTitle = title;
+    },
+    closeModal: function () {
+      this.modalOpen = false;
+      this.selectedImgUrl = '';
+      this.selectedImgTitle = '';
+    }
+  }
 }
 </script>
 
@@ -30,8 +74,8 @@ export default {
   $green: rgba(76,189,148,1);
 
   .wrapper {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    // height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,8 +88,9 @@ export default {
       justify-content: flex-start;
       box-sizing: content-box;
       box-shadow: 0px 0px 50px 1px lighten($grey, 50%);
-      width: 80%;
-      height: 70%;
+      width: 80vw;
+      height: 70vh;
+      min-height: 70vh;
 
       .copy {
         width: 50%;
@@ -74,11 +119,53 @@ export default {
 
     .section {
       display: flex;
-      justify-content: flex-start;
-      width: 80%;
+      width: 80vw;
+      padding-bottom: 2rem;
 
-      .title {
-        padding: 0 1rem;
+      .container{
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        padding: 0 1rem 2rem;
+        margin: 0;
+
+        .title {
+          padding: 0 1rem;
+        }
+
+        .content {
+          display: flex;
+          flex-direction: row;
+          margin-top: 1.5rem;
+
+          .photo {
+            padding: 1.5rem;
+            margin: 0 3rem;
+            transition-duration: 0.3s;
+            display: flex;
+            box-sizing: content-box;
+            box-shadow: 0px 0px 50px 1px lighten($grey, 50%);
+            align-items: flex-start;
+
+            img {
+              object-fit: fill;
+            }
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            &:nth-child(5n) {
+              margin-left: 0;
+            }
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
       }
     }
 
@@ -86,6 +173,7 @@ export default {
       width: 70%;
       display: flex;
       margin: 5vh 0;
+      min-height: 32px;
 
       .grey,
       .green {
