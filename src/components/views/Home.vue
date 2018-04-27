@@ -148,6 +148,7 @@ export default {
             box-sizing: content-box;
             box-shadow: 0px 0px 50px 1px lighten($grey, 50%);
             align-items: flex-start;
+            cursor: pointer;
 
             img {
               object-fit: fill;

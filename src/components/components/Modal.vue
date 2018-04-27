@@ -38,7 +38,7 @@ export default {
         transition: opacity 1s ease;
 
         .modal-wrapper {
-            z-index: 2000;
+            z-index: 210;
             display: flex;
             vertical-align: middle;
 
